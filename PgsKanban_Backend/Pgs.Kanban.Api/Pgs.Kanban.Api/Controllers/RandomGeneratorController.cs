@@ -30,26 +30,5 @@ namespace Pgs.Kanban.Api.Controllers
         {
             return Ok(_randomGeneratorService.GenerateRandomNumber(maxValue));
         }
-
-        [HttpPost]
-        public IActionResult AddNumber([FromBody]int number)
-        {
-            _randomGeneratorService.AddNumberToList(number);
-            return NoContent();
-        }
-
-        [HttpDelete]
-        public IActionResult DeleteNumber(int number)
-        {
-            _randomGeneratorService.DeleteNumber(number);
-            return NoContent();
-        }
-
-        [HttpGet]
-        [Route("AllNumbers")]
-        public IActionResult GetAllNumbers()
-        {
-            return Ok(_randomGeneratorService.GetAllNumbers());
-        }
     }
 }
