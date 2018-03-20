@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pgs.Kanban.Domain.Dtos;
 using Pgs.Kanban.Domain.Services;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,18 @@ namespace Pgs.Kanban.Api.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        public IActionResult CreateBoard([FromBody] CreateBoardDto createBoardDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = _boardService.CreateBoard(createBoardDto);
+            return Ok(result);
         }
     }
 }

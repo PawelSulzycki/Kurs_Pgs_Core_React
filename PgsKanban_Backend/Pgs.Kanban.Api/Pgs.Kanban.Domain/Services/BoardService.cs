@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pgs.Kanban.Domain.Dtos;
+using Pgs.Kanban.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,25 @@ namespace Pgs.Kanban.Domain.Services
                     Name = l.Name,
                     BoardId = l.BoardId
                 }).ToList()
+            };
+
+            return boardDto;
+        }
+
+        public BoardDto CreateBoard(CreateBoardDto createBoardDto)
+        {
+            var board = new Board()
+            {
+                Name = createBoardDto.Name
+            };
+
+            _context.Boards.Add(board);
+            _context.SaveChanges();
+
+            var boardDto = new BoardDto()
+            {
+                Id = board.Id,
+                Name = board.Name
             };
 
             return boardDto;
